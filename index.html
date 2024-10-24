@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DL-app</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div>
+      <button id="receiveBtn"><span></span>Получить</button>
+      <div id="qrcode"></div>
+    </div>
+    <div>
+      <button id="sendBtn"><span></span>Отправить</button>
+      <input type="file" id="fileInput" style="display: none;">
+      <video id="video" width="200" height="200" style="display: none;"></video>
+    </div>
+  </div>
+
+  <script src="qrcode.min.js"></script>
+  <script src="qr-scanner.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
