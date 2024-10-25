@@ -1,18 +1,25 @@
 const express = require('express');
-const path = require('path');
+const WebSocket = require('ws');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// Указываем папку, в которой будут находиться статические файлы (HTML, CSS, JS)
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Обрабатываем запрос на корневой маршрут и отправляем файл index.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.send('Server is running');
 });
 
-// Запуск сервера
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+// WebSocket сервер
+const wss = new WebSocket.Server({ server });
+
+wss.on('connection', (ws) => {
+  ws.on('message', (message) => {
+    console.log('received: %s', message);
+    ws.send(`You said: ${message}`);
+  });
+
+  ws.send('Welcome to WebSocket server');
 });
